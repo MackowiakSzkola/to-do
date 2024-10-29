@@ -2,23 +2,70 @@
   Dodaj nowe zadanie
 </h1>
 <div class="d-flex justify-content-between">
-  <input type="text" name="todo" class="form-control" (keydown.enter)="addTodo(name.value)" #name />
-  <button type="button" class="btn btn-primary mt-3" (click)="addTodo(name.value)">Zatwierdz</button>
+  <input type="text" name="todo" class="form-control" (click)="clearErrorMessage()" (keydown.enter)="addTodo(name.value, priority.value)" #name />
+  <select #priority>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <button type="button" class="btn btn-primary mt-3" (click)="addTodo(name.value, priority.value)">Zatwierdz</button>
+</div>
+
+<div  class="alert alert-warning alert alert-dismissible fade show mt-2" role="alert" *ngIf="errorMessage">
+  {{errorMessage}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="clearErrorMessage()"></button>
 </div>
 
 <div class="mt-4" *ngIf="todos.length > 0; else noTasks;">
   <h4>Lista zadan</h4>
   <ul class="list-group todos-list"  *ngFor="let todo of todos; index as i">
       <li class="list-group-item d-flex justify-content-between">
-        <span class="todo-item text-decoration-line-through" *ngIf="todo.isComplete">{{i+1}}. {{todo.name}}</span>
-        <span class="todo-item " *ngIf="!todo.isComplete">{{i+1}}. {{todo.name}}</span>
+        <span class="todo-item" [ngClass]="{'todo-complete': todo.isComplete}">
+          {{i+1}}: {{todo.name}} Priorytet: {{todo.priority}}
+        </span>
         <span>
           <input type="checkbox" class="form-check-input my-1" [checked]="todo.isComplete" (change)="changeDone(i)">
           <button type="button" class="btn btn-danger" (click)="removeTodo(i)">Delete</button>
         </span>
       </li>
   </ul>
+  <button type="button" class="btn btn-danger" (click)="removeAllChecked()">Delete</button>
+  <button type="button" class="btn btn-danger" (click)="removePriority(priorit.value)">
+    Usuń po priorytecie
+  </button>
+  <select #priorit>
+    <option value="0">Wybierz priorytet</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
 </div>
+<h1>Zmieniam</h1>
+
+<table class="mt-4" *ngIf="todos.length > 0; else noTasks;">
+  <h4>Lista zadan</h4>
+  <tr class=""  *ngFor="let todo of todos; index as i">
+    <td class="">
+        <span class="todo-item" [ngClass]="{'todo-complete': todo.isComplete}">
+          {{i+1}}: {{todo.name}} Priorytet: {{todo.priority}}
+        </span>
+      <span>
+          <input type="checkbox" class="form-check-input my-1" [checked]="todo.isComplete" (change)="changeDone(i)">
+          <button type="button" class="btn btn-danger" (click)="removeTodo(i)">Delete</button>
+        </span>
+    </td>
+  </tr>
+  <button type="button" class="btn btn-danger" (click)="removeAllChecked()">Delete</button>
+  <button type="button" class="btn btn-danger" (click)="removePriority(priorit.value)">
+    Usuń po priorytecie
+  </button>
+  <select #priorit>
+    <option value="0">Wybierz priorytet</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+</table>
 <ng-template #noTasks>
   <h5>Brak zadan do wykonania</h5>
 </ng-template>
