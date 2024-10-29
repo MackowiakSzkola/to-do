@@ -1,0 +1,9 @@
+<p class="mt-4">
+  Dodaj nowe zadanie
+</p>
+<input type="text" name="todo" class="form-control" #name>
+<button type="button" class="btn btn-primary mt-3" (click)="addTodo(name.value)">Zatwierdz</button>
+
+<li *ngFor="let todo of todos">
+  <h1>{{todo}}</h1>
+</li>
