@@ -1,0 +1,12 @@
+<h1 class="mt-4">
+  Dodaj nowe zadanie
+</h1>
+<div class="d-flex justify-content-between">
+  <input type="text" name="todo" class="form-control" (click)="clearErrorMessage()" (keydown.enter)="addTodo(name.value,priority.value)" #name />
+  <select #priority>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  <button type="button" class="btn btn-primary mt-3" (click)="addTodo(name.value, priority.value)">Zatwierdz</button>
+</div>

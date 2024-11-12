@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {KeyValuePipe, NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 import {ToDo} from '../shared/interfaces/todo.interface';
 import {fromInteropObservable} from 'rxjs/internal/observable/innerFrom';
+import {AlertComponent} from '../shared/components/alert/alert.component';
+import {AddTodoFormComponent} from './add-todo-form/add-todo-form.component';
+import {TodoComponent} from './todo/todo.component';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,7 +14,10 @@ import {fromInteropObservable} from 'rxjs/internal/observable/innerFrom';
     NgForOf,
     NgIf,
     NgStyle,
-    NgClass
+    NgClass,
+    AlertComponent,
+    AddTodoFormComponent,
+    TodoComponent
   ],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
@@ -28,9 +34,6 @@ export class TodoListComponent {
     this.errorMessage = "";
     this.todos.push({name : todo , priority: pri, isComplete: false});
     console.log("Aktualna lista todo: ", this.todos);
-  }
-  changeDone(i : number){
-    this.todos[i].isComplete = !this.todos[i].isComplete;
   }
   removeTodo(i : number){
     this.todos.splice(i, 1);

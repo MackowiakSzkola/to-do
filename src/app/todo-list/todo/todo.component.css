@@ -1,0 +1,7 @@
+.todo-item{
+  margin-left: 10px;
+}
+.todo-complete{
+  text-decoration: line-through;
+  color: aquamarine;
+}
